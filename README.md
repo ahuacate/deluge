@@ -22,5 +22,8 @@ Tasks to be performed are:
 - [ ] 6.0 Create Jellyfin Media Player Users
 - [ ] 00.00 Patches & Fixes
 
+
+## 1.0 Download trigger-decompress.sh script for Flexget
+Deluge needs to be configured with the Execute plugin to run the `trigger-decompress.sh` script (available [HERE]() when any torrent is done downloading
 ## 1.0 Setup Deluge and perform base configuration
 In your web browser type `http://192.168.30.113:8112/` and login with the default password. 
