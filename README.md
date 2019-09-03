@@ -28,7 +28,7 @@ Deluge needs to be configured with the Execute plugin to run the `trigger-decomp
 So with the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 
 ```
-wget  https://github.com/ahuacate/deluge/blob/master/deluge/trigger-decompress.sh -P /home/media/.config/deluge &&
+wget  https://github.com/ahuacate/deluge/blob/master/trigger-decompress.sh -P /home/media/.config/deluge &&
 chown media:media /home/media/.config/deluge/trigger-decompress.sh &&
 chmod u+x /home/media/.config/deluge/trigger-decompress.sh
 ```
