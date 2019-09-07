@@ -18,10 +18,10 @@ Tasks to be performed are:
 - [ ] 00.00 Patches & Fixes
 
 ## 1.00 Configure Deluge Preferences
-Before you start downloading amything you must at least configure some basics.
+Before you start downloading amnything you must perform some basic configurations.
 
 ### 1.01 Minimum Manual setting of Deluge Preferences
-Under Deluge Preferences set the following:
+Under the Deluge Preferences set the following:
 
 | Deluge Setting | Value | Note
 | :---  | :---: | :---
