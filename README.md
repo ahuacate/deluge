@@ -31,9 +31,14 @@ Under Deluge Preferences set the following:
 | Daemon port | `588461`
 | Allow Remote Connections | `☑`
 | **Plugins**
-| AutoAdd | `☑`
 | Execute | `☑` | Action: Add a Event > Torrent Complete > Command: `/home/media/.config/deluge/deluge-postprocess.sh`
 | Label | `☑` | Action: Create a label named `lazy` (all lowercase). Set the lazy label option > Folders > Apply folder settings > Move completed to: `/mnt/downloads/deluge/complete/lazy`
+
+### 1.02 Download a Deluge Preferences settings file
+Alternatively, You can download a `deluge.conf` which includes all of the above and bandwidth settings for a high speed fiber WAN connection.
+
+So with the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
+```
 
 
 ## 1.0 Download deluge-postprocess.sh script for FileBot
