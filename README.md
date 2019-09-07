@@ -34,12 +34,12 @@ Under Deluge Preferences set the following:
 | Execute | `☑` | Action: Add a Event > Torrent Complete > Command: `/home/media/.config/deluge/deluge-postprocess.sh`
 | Label | `☑` | Action: Create a label named `lazy` (all lowercase). Set the lazy label option > Folders > Apply folder settings > Move completed to: `/mnt/downloads/deluge/complete/lazy`
 
-### 1.02 Download a Deluge Preferences settings file
-Alternatively, You can download a `deluge.conf` which includes all of the above and bandwidth settings for a high speed fiber WAN connection.
+### 1.02 Download pre-configured Deluge Preferences setting files
+Alternatively, You can download three files `core.conf`, `execute.conf` and `label.conf` which includes all of the above (Step 1.01) and bandwidth settings for a high speed fiber WAN connection.
 
 So with the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 ```
-
+wget -r -core.conf -execute.conf -label.conf https://github.com/ahuacate/deluge/blob/master/ -P /tmp
 
 ## 1.0 Download deluge-postprocess.sh script for FileBot
 Deluge needs to be configured with the Execute plugin to run the `deluge-postprocess.sh` script (available [HERE](https://github.com/ahuacate/deluge/blob/master/deluge/deluge-postprocess.sh)). This scripts works with FlexGet and commands FileBot to rename newly finished torrents and copy the files to your NAS ready for serving by Jellyfin.
