@@ -14,7 +14,9 @@ Other Prerequisites are:
 - [x] Deluge LXC with Deluge SW installed as per [Deluge LXC - Ubuntu 18.04](https://github.com/ahuacate/proxmox-lxc/blob/master/README.md#50-deluge-lxc---ubuntu-1804).
 
 Tasks to be performed are:
-- [ ] 1.0 Setup Jellyfin and perform base configuration
+- [ ] 1.00 Configure Deluge Preferences
+- [ ] 2.00 Download deluge-postprocess.sh script for FileBot
+- [ ] 3.00 How to Log into Deluge
 - [ ] 00.00 Patches & Fixes
 
 ## 1.00 Configure Deluge Preferences
@@ -60,5 +62,5 @@ sudo chmod +rx /home/media/.config/deluge/deluge-postprocess.sh &&
 chown 1005:1005 /home/media/.config/deluge/deluge-postprocess.sh
 ```
 
-## 3.00 Setup Deluge and perform base configuration
+## 3.00 How to Log into Deluge
 In your web browser type `http://192.168.30.113:8112/` and login with the default password. 
