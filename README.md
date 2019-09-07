@@ -38,11 +38,19 @@ Under Deluge Preferences set the following:
 Alternatively, You can download three files `core.conf`, `execute.conf` and `label.conf` which includes all of the above (Step 1.01) and bandwidth settings for a high speed fiber WAN connection.
 
 So with the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
-```
-wget -r -core.conf -execute.conf -label.conf https://github.com/ahuacate/deluge/blob/master/ -P /tmp
 
-## 1.0 Download deluge-postprocess.sh script for FileBot
-Deluge needs to be configured with the Execute plugin to run the `deluge-postprocess.sh` script (available [HERE](https://github.com/ahuacate/deluge/blob/master/deluge/deluge-postprocess.sh)). This scripts works with FlexGet and commands FileBot to rename newly finished torrents and copy the files to your NAS ready for serving by Jellyfin.
+```
+sudo systemctl stop deluge &&
+wget https://github.com/ahuacate/deluge/blob/master/core.conf -P /home/media/.config/deluge &&
+wget https://github.com/ahuacate/deluge/blob/master/execute.conf -P /home/media/.config/deluge &&
+wget https://github.com/ahuacate/deluge/blob/master/label.conf -P /home/media/.config/deluge &&
+chown 1005:1005 /home/media/.config/deluge/*.conf &&
+sudo chmod 600 /home/media/.config/deluge/*.conf &&
+sudo systemctl restart deluge
+```
+
+## 2.00 Download deluge-postprocess.sh script for FileBot
+Deluge needs to be configured with the Execute Plugin to run the `deluge-postprocess.sh` script available [HERE](https://github.com/ahuacate/deluge/blob/master/deluge/deluge-postprocess.sh). This script works with Deluge and commands FileBot to rename newly finished FlexGet added torrents and copy the renamed files to your NAS.
 
 So with the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 
@@ -52,5 +60,5 @@ sudo chmod +rx /home/media/.config/deluge/deluge-postprocess.sh &&
 chown 1005:1005 /home/media/.config/deluge/deluge-postprocess.sh
 ```
 
-## 1.0 Setup Deluge and perform base configuration
+## 3.00 Setup Deluge and perform base configuration
 In your web browser type `http://192.168.30.113:8112/` and login with the default password. 
