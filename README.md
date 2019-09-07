@@ -17,6 +17,24 @@ Tasks to be performed are:
 - [ ] 1.0 Setup Jellyfin and perform base configuration
 - [ ] 00.00 Patches & Fixes
 
+## 1.00 Configure Deluge Preferences
+Before you start downloading amything you must at least configure some basics.
+
+### 1.01 Minimum Manual setting of Deluge Preferences
+Under Deluge Preferences set the following:
+
+| Deluge Setting | Value | Note
+| :---  | :---: | :---
+| **Downloads**
+| Download to | `/mnt/downloads/deluge/incomplete`
+| **Daemon**
+| Daemon port | `588461`
+| Allow Remote Connections | `☑`
+| **Plugins**
+| AutoAdd | `☑`
+| Execute | `☑` | Action: Add a Event > Torrent Complete > Command: `/home/media/.config/deluge/deluge-postprocess.sh`
+| Label | `☑` | Action: Create a label named `lazy` (all lowercase). Set the lazy label option > Folders > Apply folder settings > Move completed to: `/mnt/downloads/deluge/complete/lazy`
+
 
 ## 1.0 Download deluge-postprocess.sh script for FileBot
 Deluge needs to be configured with the Execute plugin to run the `deluge-postprocess.sh` script (available [HERE](https://github.com/ahuacate/deluge/blob/master/deluge/deluge-postprocess.sh)). This scripts works with FlexGet and commands FileBot to rename newly finished torrents and copy the files to your NAS ready for serving by Jellyfin.
