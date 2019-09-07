@@ -15,22 +15,19 @@ Other Prerequisites are:
 
 Tasks to be performed are:
 - [ ] 1.0 Setup Jellyfin and perform base configuration
-- [ ] 2.0 Jellyfin Common Settings
-- [ ] 3.0 Add media to the Jellyfin Library
-- [ ] 4.0 Edit Jellyfin `Storm` User
-- [ ] 5.0 Create Jellyfin Remote Access Users
-- [ ] 6.0 Create Jellyfin Media Player Users
 - [ ] 00.00 Patches & Fixes
 
 
-## 1.0 Download trigger-decompress.sh script for Flexget
-Deluge needs to be configured with the Execute plugin to run the `trigger-decompress.sh` script (available [HERE](https://github.com/ahuacate/deluge/blob/master/deluge/trigger-decompress.sh)) when any torrent is done downloading.
+## 1.0 Download deluge-postprocess.sh script for FileBot
+Deluge needs to be configured with the Execute plugin to run the `deluge-postprocess.sh` script (available [HERE](https://github.com/ahuacate/deluge/blob/master/deluge/deluge-postprocess.sh)). This scripts works with FlexGet and commands FileBot to rename newly finished torrents and copy the files to your NAS ready for serving by Jellyfin.
+
 So with the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 
 ```
-wget  https://github.com/ahuacate/deluge/blob/master/trigger-decompress.sh -P /home/media/.config/deluge &&
-chown media:media /home/media/.config/deluge/trigger-decompress.sh &&
-chmod u+x /home/media/.config/deluge/trigger-decompress.sh
+wget  https://github.com/ahuacate/deluge/blob/master/deluge-postprocess.sh -P /home/media/.config/deluge &&
+sudo chmod +rx /home/media/.config/deluge/deluge-postprocess.sh &&
+chown 1005:1005 /home/media/.config/deluge/deluge-postprocess.sh
 ```
+
 ## 1.0 Setup Deluge and perform base configuration
 In your web browser type `http://192.168.30.113:8112/` and login with the default password. 
