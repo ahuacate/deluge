@@ -11,7 +11,8 @@ Other Prerequisites are:
 - [x] Synology NAS, or linux variant of a NAS, is fully configured as per [SYNOBUILD](https://github.com/ahuacate/synobuild#synobuild).
 - [x] Proxmox node fully configured as per [PROXMOX-NODE BUILDING](https://github.com/ahuacate/proxmox-node/blob/master/README.md#proxmox-node-building).
 - [x] pfSense is fully configured as per [HAProxy in pfSense](https://github.com/ahuacate/proxmox-reverseproxy/blob/master/README.md#haproxy-in-pfsense)
-- [x] Deluge LXC with Deluge SW installed as per [Deluge LXC - Ubuntu 18.04](https://github.com/ahuacate/proxmox-lxc/blob/master/README.md#50-deluge-lxc---ubuntu-1804).
+- [x] Deluge LXC with Deluge SW installed as per [Deluge LXC - Ubuntu 18.04](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804).
+- [x] FileBot is installed as per [FileBot Installation on Deluge LXC - Ubuntu 18.04](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#700-filebot-installation-on-deluge-lxc---ubuntu-1804)
 
 Tasks to be performed are:
 - [ ] 1.00 Configure Deluge Preferences
@@ -20,10 +21,13 @@ Tasks to be performed are:
 - [ ] 00.00 Patches & Fixes
 
 ## 1.00 Configure Deluge Preferences
-Before you start downloading amnything you must perform some basic configurations.
+Before you start using Deluge you must configure your Deluge client preferences. 
 
-### 1.01 Minimum Manual setting of Deluge Preferences
-Under the Deluge Preferences set the following:
+### 1.01 Manual Configuration
+This is the minimum required to get Deluge working without any tuning.
+
+In your web browser type `http://192.168.30.113:8112/` to connect to the Deluge webUI and login with the default password `deluge`.
+Click `Preferences` and set the following:
 
 | Deluge Setting | Value | Note
 | :---  | :---: | :---
@@ -37,7 +41,7 @@ Under the Deluge Preferences set the following:
 | Label | `☑` | Action: Create a label named `lazy` (all lowercase). Set the lazy label option > Folders > Apply folder settings > Move completed to: `/mnt/downloads/deluge/complete/lazy`
 
 ### 1.02 Download pre-configured Deluge Preferences setting files
-Alternatively, You can download three files `core.conf`, `execute.conf` and `label.conf` which includes all of the above (Step 1.01) and bandwidth settings for a high speed fiber WAN connection.
+The easiest method is download precongigured Deluge setting files. You must download three files `core.conf`, `execute.conf` and `label.conf`, which includes all of the above (Step 1.01) and more.
 
 So with the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 
