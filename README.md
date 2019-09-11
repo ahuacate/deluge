@@ -47,9 +47,9 @@ So with the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shel
 
 ```
 sudo systemctl stop deluge &&
-wget https://github.com/ahuacate/deluge/blob/master/core.conf -P /home/media/.config/deluge &&
-wget https://github.com/ahuacate/deluge/blob/master/execute.conf -P /home/media/.config/deluge &&
-wget https://github.com/ahuacate/deluge/blob/master/label.conf -P /home/media/.config/deluge &&
+wget https://raw.githubusercontent.com/ahuacate/deluge/master/core.conf -P /home/media/.config/deluge &&
+wget https://raw.githubusercontent.com/ahuacate/deluge/master/execute.conf -P /home/media/.config/deluge &&
+wget https://raw.githubusercontent.com/ahuacate/deluge/master/label.conf -P /home/media/.config/deluge &&
 chown 1005:1005 /home/media/.config/deluge/*.conf &&
 sudo chmod 600 /home/media/.config/deluge/*.conf &&
 sudo systemctl restart deluge
