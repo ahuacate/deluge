@@ -16,7 +16,7 @@ Other Prerequisites are:
 
 Tasks to be performed are:
 - [ ] 1.00 Configure Deluge Preferences
-- [ ] 2.00 Download deluge-postprocess.sh script for FileBot
+- [ ] 2.00 Download the FileBot deluge-postprocess.sh script for Deluge
 - [ ] 3.00 How to Log into Deluge
 - [ ] 00.00 Patches & Fixes
 
@@ -26,10 +26,11 @@ Before you start using Deluge you must configure your Deluge client preferences.
 ### 1.01 Manual Configuration
 This is the minimum required to get Deluge working without any tuning.
 
-In your web browser type `http://192.168.30.113:8112/` to connect to the Deluge webUI and login with the default password `deluge`.
+In your web browser type `http://192.168.30.113:8112/` to connect to the Deluge WebUI and login with the default password `deluge`.
+
 Click `Preferences` and set the following:
 
-| Deluge Setting | Value | Note
+| Deluge Preferences | Value | Note
 | :---  | :---: | :---
 | **Downloads**
 | Download to | `/mnt/downloads/deluge/incomplete`
@@ -37,34 +38,46 @@ Click `Preferences` and set the following:
 | Daemon port | `588461`
 | Allow Remote Connections | `☑`
 | **Plugins**
-| Execute | `☑` | Action: Add a Event > Torrent Complete > Command: `/home/media/.config/deluge/deluge-postprocess.sh`
-| Label | `☑` | Action: Create a label named `lazy` (all lowercase). Set the lazy label option > Folders > Apply folder settings > Move completed to: `/mnt/downloads/deluge/complete/lazy`
+| Execute | `☑` | Note: See below.
+| Label | `☑` | Note: See below.
 
-### 1.02 Download pre-configured Deluge Preferences setting files
-The easiest method is download precongigured Deluge setting files. You must download three files `core.conf`, `execute.conf` and `label.conf`, which includes all of the above (Step 1.01) and more.
+To enable Deluge Plugins you must restart Deluge after flagging them to be enabled. After restart both Execute & Label Plugins should be automatically configured and working if you followed the installation guide [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804).
 
-So with the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
-
+To restart Deluge go to the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 ```
-sudo systemctl stop deluge &&
-wget https://raw.githubusercontent.com/ahuacate/deluge/master/core.conf -P /home/media/.config/deluge &&
-wget https://raw.githubusercontent.com/ahuacate/deluge/master/execute.conf -P /home/media/.config/deluge &&
-wget https://raw.githubusercontent.com/ahuacate/deluge/master/label.conf -P /home/media/.config/deluge &&
-chown 1005:1005 /home/media/.config/deluge/*.conf &&
-sudo chmod 600 /home/media/.config/deluge/*.conf &&
 sudo systemctl restart deluge
 ```
+Now in Deluge Preferences you should see both the Execute & Label Plugins in the left column. Each plugin setting should be as follows:
 
-## 2.00 Download deluge-postprocess.sh script for FileBot
-Deluge needs to be configured with the Execute Plugin to run the `deluge-postprocess.sh` script available [HERE](https://github.com/ahuacate/deluge/blob/master/deluge/deluge-postprocess.sh). This script works with Deluge and commands FileBot to rename newly finished FlexGet added torrents and copy the renamed files to your NAS.
+|  Deluge Preferences | Value | Value
+| :---  | :---: | :---
+| Label | Shown on the far left WebUI column. | Label Preferences: `The Label plugin is enabled.`
+| Execute | Event: `Torrent Complete` | Command: `/home/media/.config/deluge/deluge-postprocess.sh`
 
-So with the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
+## 2.00 Download the FileBot deluge-postprocess.sh script for Deluge
+Filebot renames and moves all your Flexget downloads ready for viewing on your NAS. This action is done by running a shell script called `deluge-postprocess.sh`.
+
+This script (`deluge-postprocess.sh`) is for Deluge only. It would've been installed when you completed the Deluge installation guide [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804).
+
+Filebot renames and moves all your Flexget downloads ready for viewing on your NAS. This action is done by running a shell script called `deluge-postprocess.sh`. Deluge uses the Execute Plugin to execute `deluge-postprocess.sh` whenever it completes a torrent download.
+
+In the event you wish to upgrade or overwrite your `deluge-postprocess.sh` you can with these instructions. With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 
 ```
-wget  https://github.com/ahuacate/deluge/blob/master/deluge-postprocess.sh -P /home/media/.config/deluge &&
-sudo chmod +rx /home/media/.config/deluge/deluge-postprocess.sh &&
+wget  https://raw.githubusercontent.com/ahuacate/deluge/master/deluge-postprocess.sh -P /home/media/.config/deluge &&
+chmod +rx /home/media/.config/deluge/deluge-postprocess.sh &&
 chown 1005:1005 /home/media/.config/deluge/deluge-postprocess.sh
 ```
 
 ## 3.00 How to Log into Deluge
-In your web browser type `http://192.168.30.113:8112/` and login with the default password. 
+In your web browser type `http://192.168.30.113:8112/` and login with the default password.
+
+## 00.00 Patches & Fixes
+All CLI commands performed in the `typhoon-01` > `113 (deluge)` > `>_ Shell` :
+
+Restart Deluge
+```
+sudo systemctl restart deluge
+```
+
+
