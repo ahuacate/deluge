@@ -75,9 +75,14 @@ In your web browser type `http://192.168.30.113:8112/` and login with the defaul
 ## 00.00 Patches & Fixes
 All CLI commands performed in the `typhoon-01` > `113 (deluge)` > `>_ Shell` :
 
-Restart Deluge
+**Restart Deluge**
 ```
 sudo systemctl restart deluge
 ```
 
+**Erase and Clean FileBot Database**
+```
+rm {/home/media/.filebot/amc.log,/home/media/.filebot/history.xml,/home/media/.filebot/output.txt,/home/media/.filebot/amc.txt} &&
+filebot -clear-cache
+```
 
