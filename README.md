@@ -59,7 +59,10 @@ Filebot renames and moves all your Flexget downloads ready for viewing on your N
 
 This script (`deluge-postprocess.sh`) is for Deluge only. It would've been installed when you completed the Deluge installation guide [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804).
 
-In the event you want to upgrade or overwrite your `deluge-postprocess.sh` you can with these instructions. With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
+In the event you want to upgrade or overwrite your `deluge-postprocess.sh` you can with these instructions. 
+
+**Option (1):** Easy Way
+With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 
 ```
 wget  https://raw.githubusercontent.com/ahuacate/deluge/master/deluge-postprocess.sh -P /home/media/.config/deluge &&
