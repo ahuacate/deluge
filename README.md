@@ -62,6 +62,7 @@ This script (`deluge-postprocess.sh`) is for Deluge only. It would've been insta
 In the event you want to upgrade or overwrite your `deluge-postprocess.sh` you can with these instructions. 
 
 **Option (1):** Easy Way
+
 With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 
 ```
@@ -69,6 +70,28 @@ wget  https://raw.githubusercontent.com/ahuacate/deluge/master/deluge-postproces
 chmod +rx /home/media/.config/deluge/deluge-postprocess.sh &&
 chown 1005:1005 /home/media/.config/deluge/deluge-postprocess.sh
 ```
+**Option (2):** Nano Way
+With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
+```
+nano /home/media/.config/deluge/deluge-postprocess.sh
+```
+Now cut & paste the following into the terminal window:
+```
+#!/bin/sh -xu
+
+# Input Parameters & Folder Configuration
+SERIES_INPUT="/mnt/downloads/deluge/complete/flexget/series"
+SERIES_OUTPUT="/mnt/video/documentary/series"
+MOVIE_INPUT="/mnt/downloads/deluge/complete/flexget/movies"
+MOVIE_OUTPUT="/mnt/video/documentary/movies"
+UNSORTED_OUTPUT="/mnt/video/documentary/unsorted"
+
+filebot -script fn:amc --output "$SERIES_OUTPUT" --def "ut_label=series" --action copy --conflict override -non-strict --def artwork=n --def unsorted=y --def unsortedFormat="$MOVIE_INPUT/{fn}.{ext}" --def clean=y "ut_dir=$SERIES_INPUT" "ut_kind=multi" --def "seriesFormat=/mnt/video/documentary/series/{n}/{'S'+s.pad(2)}/{n.replaceAll(/[!?.]+$/).space('.')}.{'s'+s.pad(2)}e{e.pad(2)}.{vf}.{source}.{vc}.{ac}" --def excludeList="/home/media/.filebot/amc.txt" -no-xattr --log-file "/home/media/.filebot/amc.log" --def reportError=y > /home/media/.filebot/output.txt 2>&1
+
+
+filebot -script fn:amc --output "$MOVIE_OUTPUT" --def "ut_label=movies" --action move --conflict override --def artwork=n --def clean=y "ut_dir=$MOVIE_INPUT" "ut_kind=multi" --def "movieFormat=/mnt/video/documentary/movies/{ny}/{n.upperInitial().replaceAll(/[!?.]+$/).space('.')}.{y}.{vf}.{source}.{vc}.{ac}" --def unsorted=y --def unsortedFormat="$UNSORTED_OUTPUT/{fn}.{ext}" --def excludeList="/home/media/.filebot/amc.txt" -no-xattr --log-file "/home/media/.filebot/amc.log" --def reportError=y > /home/media/.filebot/output.txt 2>&1" > /home/media/.config/deluge/deluge-postprocess.sh
+```
+Note: After pasting your key (copy & paste the license key code with your mouse buttons) into the terminal, it's `CTRL O` (thats a capital letter O, not numerical 0) to prompt a save, `Enter` to save the file and `CTRL X` to exit nano.
 
 ## 3.00 How to Log into Deluge
 In your web browser type `http://192.168.30.113:8112/` and login with the default password.
