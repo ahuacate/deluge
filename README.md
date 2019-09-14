@@ -103,10 +103,3 @@ All CLI commands performed in the `typhoon-01` > `113 (deluge)` > `>_ Shell` :
 ```
 sudo systemctl restart deluge
 ```
-
-**Erase and Clean FileBot Database**
-```
-rm {/home/media/.filebot/amc.log,/home/media/.filebot/history.xml,/home/media/.filebot/output.txt,/home/media/.filebot/amc.txt} &&
-filebot -clear-cache
-```
-
