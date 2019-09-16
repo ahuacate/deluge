@@ -40,6 +40,7 @@ Click `Preferences` and set the following:
 | Daemon port | `588461`
 | Allow Remote Connections | `☑`
 | **Plugins**
+| Autoremoveplus | `☑` |
 | Execute | `☑` | Note: See below.
 | Label | `☑` | Note: See below.
 
@@ -86,7 +87,13 @@ sudo systemctl restart deluge
 
 ## 4.00 Download the latest Autoremoveplus Plugin configuration file
 With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
-
+```
+pkill -9 deluged &&
+sleep 5 &&
+wget  https://raw.githubusercontent.com/ahuacate/deluge/master/autoremoveplus.conf -P /home/media/.config/deluge &&
+chown 1005:1005 {/home/media/.config/deluge/autoremoveplus.conf} &&
+sudo systemctl restart deluge
+```
 ## 00.00 Patches & Fixes
 All CLI commands performed in the `typhoon-01` > `113 (deluge)` > `>_ Shell` :
 
