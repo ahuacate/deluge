@@ -44,7 +44,7 @@ Click `Preferences` and set the following:
 | Execute | `☑` | Note: See below.
 | Label | `☑` | Note: See below.
 
-To enable Deluge Plugins you must restart Deluge after flagging them to be enabled. After restart both Execute & Label Plugins should be automatically configured and working if you followed the installation guide [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804).
+To enable Deluge Plugins you must restart Deluge after flagging them to be enabled. After restart Autoremove, Execute & Label Plugins should be automatically configured and working if you followed the installation guide [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804).
 
 To restart Deluge go to the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 ```
@@ -56,6 +56,14 @@ Now in Deluge Preferences you should see both the Execute & Label Plugins in the
 | :---  | :---: | :---
 | Label | Shown on the far left WebUI column. | Label Preferences: `The Label plugin is enabled.`
 | Execute | Event: `Torrent Complete` | Command: `/home/media/.config/deluge/deluge-postprocess.sh`
+
+```
+# Note: Not working - IGNORE. Script to enable plugins.
+sleep 5 &&
+pkill -9 deluged &&
+sed -i '/  "enabled_plugins": \[\],/c\  "enabled_plugins": \[\n    "Execute",\n    "AutoRemovePlus",\n    "Label"\n  ],' /home/media/.config/deluge/core.conf &&
+sudo systemctl restart deluge
+```
 
 ## 2.00 Download the latest Execute Plugin for FileBot deluge-postprocess.sh script
 Filebot renames and moves all your Flexget downloads ready for viewing on your NAS. This action is done by running a shell script called `deluge-postprocess.sh`. Deluge uses the Execute Plugin to execute `deluge-postprocess.sh` whenever it completes a torrent download.
