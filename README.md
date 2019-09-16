@@ -21,7 +21,9 @@ Tasks to be performed are:
 - [ ] 00.00 Patches & Fixes
 
 ## 1.00 Configure Deluge Preferences
-Before you start using Deluge you must configure your Deluge client preferences. 
+Your Deluge should be ready to go if you followed the installation instructions [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804). 
+
+But if you have naked raw installation or want to update some settings from our GitHub repository the instructions are as follows. 
 
 ### 1.01 Manual Configuration
 This is the minimum required to get Deluge working without any tuning.
@@ -54,46 +56,36 @@ Now in Deluge Preferences you should see both the Execute & Label Plugins in the
 | Label | Shown on the far left WebUI column. | Label Preferences: `The Label plugin is enabled.`
 | Execute | Event: `Torrent Complete` | Command: `/home/media/.config/deluge/deluge-postprocess.sh`
 
-## 2.00 Download the FileBot deluge-postprocess.sh script for Deluge
+## 2.00 Download the latest Execute Plugin for FileBot deluge-postprocess.sh script
 Filebot renames and moves all your Flexget downloads ready for viewing on your NAS. This action is done by running a shell script called `deluge-postprocess.sh`. Deluge uses the Execute Plugin to execute `deluge-postprocess.sh` whenever it completes a torrent download.
 
 This script (`deluge-postprocess.sh`) is for Deluge only. It would've been installed when you completed the Deluge installation guide [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804).
 
 In the event you want to upgrade or overwrite your `deluge-postprocess.sh` you can with these instructions. 
 
-**Option (1):** Easy Way
-
 With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 
 ```
+pkill -9 deluged &&
+sleep 5 &&
 wget  https://raw.githubusercontent.com/ahuacate/deluge/master/deluge-postprocess.sh -P /home/media/.config/deluge &&
 chmod +rx /home/media/.config/deluge/deluge-postprocess.sh &&
-chown 1005:1005 /home/media/.config/deluge/deluge-postprocess.sh
+chown 1005:1005 /home/media/.config/deluge/deluge-postprocess.sh &&
+sudo systemctl restart deluge
 ```
-**Option (2):** Nano Way
+
+## 3.00 Download the latest Label Plugin configuration file
 With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 ```
-nano /home/media/.config/deluge/deluge-postprocess.sh
+pkill -9 deluged &&
+sleep 5 &&
+wget  https://raw.githubusercontent.com/ahuacate/deluge/master/label.conf -P /home/media/.config/deluge &&
+chown 1005:1005 {/home/media/.config/deluge/label.conf} &&
+sudo systemctl restart deluge
 ```
-Now cut & paste the following into the terminal window:
-```
-#!/bin/bash
 
-# Input Parameters & Folder Configuration
-SERIES_INPUT="/mnt/downloads/deluge/complete/flexget/series"
-SERIES_OUTPUT="/mnt/video/documentary/series"
-MOVIES_INPUT="/mnt/downloads/deluge/complete/flexget/movies"
-MOVIES_OUTPUT="/mnt/video/documentary/movies"
-UNSORTED_OUTPUT="/mnt/video/documentary/unsorted"
-
-filebot -script fn:amc --output "$SERIES_OUTPUT" --db thetvdb --def --action copy --conflict override -non-strict --def artwork=n --def excludeList="/home/media/.filebot/series_amc.txt" --def unsorted=y --def unsortedFormat="$MOVIE_INPUT/{fn}.{ext}" --def clean=y --def "seriesFormat=/mnt/video/documentary/series/{n}/{'S'+s.pad(2)}/{n.replaceAll(/[!?.]+$/).space('.')}.{'s'+s.pad(2)}e{e.pad(2)}.{vf}.{source}.{vc}.{ac}" "ut_dir=$SERIES_INPUT" "ut_kind=multi" "ut_label=series" -no-xattr --log-file "/home/media/.filebot/amc.log" --def reportError=y > /home/media/.filebot/series_output.txt 2>&1
-
-filebot -script fn:amc --output "$MOVIES_OUTPUT" --db TheMovieDB --def --action move --conflict override -non-strict --def artwork=n --def excludeList="/home/media/.filebot/movies_amc.txt" --def unsorted=y --def unsortedFormat="$UNSORTED_OUTPUT/{fn}.{ext}" --def clean=y --def "movieFormat=/mnt/video/documentary/movies/{ny}" "ut_dir=$MOVIES_INPUT" "ut_kind=multi" "ut_label=movies" -no-xattr --log-file "/home/media/.filebot/amc.log" --def reportError=y > /home/media/.filebot/movies_output.txt 2>&1
-```
-Note: After pasting your key (copy & paste the license key code with your mouse buttons) into the terminal, it's `CTRL O` (thats a capital letter O, not numerical 0) to prompt a save, `Enter` to save the file and `CTRL X` to exit nano.
-
-## 3.00 How to Log into Deluge
-In your web browser type `http://192.168.30.113:8112/` and login with the default password.
+## 4.00 Download the latest Autoremoveplus Plugin configuration file
+With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 
 ## 00.00 Patches & Fixes
 All CLI commands performed in the `typhoon-01` > `113 (deluge)` > `>_ Shell` :
