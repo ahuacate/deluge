@@ -21,13 +21,12 @@ Tasks to be performed are:
 - [ ] 00.00 Patches & Fixes
 
 ## 1.00 Configure Deluge Preferences
-Your Deluge should be ready to go if you followed the installation instructions [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804). 
+Your Deluge should be ready to go when you installed Deluge as shown instructions [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804). 
 
-But if you have naked raw installation or want to update some settings from our GitHub repository the instructions are as follows. 
+But if you want to modify or update your config with the latest from our GitHub repository read-on.
 
 ### 1.01 Manual Configuration
-This is the minimum required to get Deluge working without any tuning.
-
+This is the minimum required to get Deluge working with Sonarr, Radarr and family of Apps.
 In your web browser type `http://192.168.30.113:8112/` to connect to the Deluge WebUI and login with the default password `deluge`.
 
 Click `Preferences` and set the following:
@@ -44,7 +43,7 @@ Click `Preferences` and set the following:
 | Execute | `☑` | Note: See below.
 | Label | `☑` | Note: See below.
 
-To enable Deluge Plugins you must restart Deluge after flagging them to be enabled. After restart Autoremove, Execute & Label Plugins should be automatically configured and working if you followed the installation guide [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804).
+To enable Deluge Plugins you must restart Deluge after flagging the plugin. After restart Autoremoveplus, Execute & Label Plugins should be automatically configured and working with our pre-installed plugin settings files.
 
 To restart Deluge go to the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 ```
@@ -57,18 +56,11 @@ Now in Deluge Preferences you should see both the Execute & Label Plugins in the
 | Label | Shown on the far left WebUI column. | Label Preferences: `The Label plugin is enabled.`
 | Execute | Event: `Torrent Complete` | Command: `/home/media/.config/deluge/deluge-postprocess.sh`
 
-```
-# Note: Not working - IGNORE. Script to enable plugins.
-sleep 5 &&
-pkill -9 deluged &&
-sed -i '/  "enabled_plugins": \[\],/c\  "enabled_plugins": \[\n    "Execute",\n    "AutoRemovePlus",\n    "Label"\n  ],' /home/media/.config/deluge/core.conf &&
-sudo systemctl restart deluge
-```
 
 ## 2.00 Download the latest Execute Plugin for FileBot deluge-postprocess.sh script
-Filebot renames and moves all your Flexget downloads ready for viewing on your NAS. This action is done by running a shell script called `deluge-postprocess.sh`. Deluge uses the Execute Plugin to execute `deluge-postprocess.sh` whenever it completes a torrent download.
+Filebot renames and moves all your Flexget downloads ready for viewing on your NAS. This action is done by running a shell script called `deluge-postprocess.sh`. Deluge uses the Execute Plugin to execute `deluge-postprocess.sh` whenever Deluge completes a torrent download.
 
-This script (`deluge-postprocess.sh`) is for Deluge only. It would've been installed when you completed the Deluge installation guide [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804).
+The script (`deluge-postprocess.sh`) is for Deluge only. It was installed when you completed the Deluge installation guide shown  [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804).
 
 In the event you want to upgrade or overwrite your `deluge-postprocess.sh` you can with these instructions. 
 
