@@ -69,8 +69,9 @@ With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` 
 
 ```
 pkill -9 deluged &&
+sudo systemctl stop deluge &&
 sleep 5 &&
-wget  https://raw.githubusercontent.com/ahuacate/deluge/master/deluge-postprocess.sh -P /home/media/.config/deluge &&
+wget -q https://raw.githubusercontent.com/ahuacate/deluge/master/deluge-postprocess.sh -O /home/media/.config/deluge/deluge-postprocess.sh &&
 chmod +rx /home/media/.config/deluge/deluge-postprocess.sh &&
 chown 1005:1005 /home/media/.config/deluge/deluge-postprocess.sh &&
 sudo systemctl restart deluge
@@ -80,8 +81,9 @@ sudo systemctl restart deluge
 With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 ```
 pkill -9 deluged &&
+sudo systemctl stop deluge &&
 sleep 5 &&
-wget  https://raw.githubusercontent.com/ahuacate/deluge/master/label.conf -P /home/media/.config/deluge &&
+wget -q https://raw.githubusercontent.com/ahuacate/deluge/master/label.conf -O /home/media/.config/deluge/label.conf &&
 chown 1005:1005 {/home/media/.config/deluge/label.conf} &&
 sudo systemctl restart deluge
 ```
@@ -90,8 +92,9 @@ sudo systemctl restart deluge
 With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 ```
 pkill -9 deluged &&
+sudo systemctl stop deluge &&
 sleep 5 &&
-wget  https://raw.githubusercontent.com/ahuacate/deluge/master/autoremoveplus.conf -P /home/media/.config/deluge &&
+wget -q https://raw.githubusercontent.com/ahuacate/deluge/master/autoremoveplus.conf -O /home/media/.config/deluge/autoremoveplus.conf &&
 chown 1005:1005 {/home/media/.config/deluge/autoremoveplus.conf} &&
 sudo systemctl restart deluge
 ```
