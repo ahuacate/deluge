@@ -16,8 +16,9 @@ Other Prerequisites are:
 
 Tasks to be performed are:
 - [ ] 1.00 Configure Deluge Preferences
-- [ ] 2.00 Download the FileBot deluge-postprocess.sh script for Deluge
-- [ ] 3.00 How to Log into Deluge
+- [ ] 2.00 Download the latest Execute Plugin for FileBot deluge-postprocess.sh script
+- [ ] 3.00 Download the latest Label Plugin configuration file
+- [ ] 4.00 Download the latest Autoremoveplus Plugin configuration file
 - [ ] 00.00 Patches & Fixes
 
 ## 1.00 Configure Deluge Preferences
