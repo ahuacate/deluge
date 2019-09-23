@@ -83,8 +83,8 @@ With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` 
 pkill -9 deluged &&
 sudo systemctl stop deluge &&
 sleep 5 &&
-wget -q https://raw.githubusercontent.com/ahuacate/deluge/master/label.conf -O /home/media/.config/deluge/label.conf &&
-chown 1005:1005 {/home/media/.config/deluge/label.conf} &&
+wget https://raw.githubusercontent.com/ahuacate/deluge/master/label.conf -O /home/media/.config/deluge/label.conf &&
+chown 1005:1005 /home/media/.config/deluge/label.conf &&
 sudo systemctl restart deluge
 ```
 
@@ -94,7 +94,7 @@ With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` 
 pkill -9 deluged &&
 sudo systemctl stop deluge &&
 sleep 5 &&
-wget -q https://raw.githubusercontent.com/ahuacate/deluge/master/autoremoveplus.conf -O /home/media/.config/deluge/autoremoveplus.conf &&
+wget https://raw.githubusercontent.com/ahuacate/deluge/master/autoremoveplus.conf -O /home/media/.config/deluge/autoremoveplus.conf &&
 chown 1005:1005 {/home/media/.config/deluge/autoremoveplus.conf} &&
 sudo systemctl restart deluge
 ```
