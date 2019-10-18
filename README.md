@@ -21,6 +21,7 @@ Tasks to be performed are:
 - [ ] 4.00 Download the latest Autoremoveplus Plugin configuration file
 - [ ] 00.00 Patches & Fixes
 
+
 ## 1.00 Configure Deluge Preferences
 Your Deluge should be ready to go when you installed Deluge as shown instructions [HERE](https://github.com/ahuacate/proxmox-lxc-media/blob/master/README.md#400-deluge-lxc---ubuntu-1804). 
 
@@ -77,6 +78,7 @@ chown 1605:65605 /home/media/.config/deluge/deluge-postprocess.sh &&
 sudo systemctl restart deluge
 ```
 
+
 ## 3.00 Download the latest Label Plugin configuration file
 With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 ```
@@ -88,6 +90,7 @@ chown 1605:65605 /home/media/.config/deluge/label.conf &&
 sudo systemctl restart deluge
 ```
 
+
 ## 4.00 Download the latest Autoremoveplus Plugin configuration file
 With the Proxmox web interface go to `typhoon-01` > `113 (deluge)` > `>_ Shell` and type the following:
 ```
@@ -98,6 +101,8 @@ wget https://raw.githubusercontent.com/ahuacate/deluge/master/autoremoveplus.con
 chown 1605:65605 /home/media/.config/deluge/autoremoveplus.conf &&
 sudo systemctl restart deluge
 ```
+
+
 ## 00.00 Patches & Fixes
 All CLI commands performed in the `typhoon-01` > `113 (deluge)` > `>_ Shell` :
 
